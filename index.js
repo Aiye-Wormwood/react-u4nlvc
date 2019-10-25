@@ -245,4 +245,4 @@ class Game extends React.Component {
 }
 
 
-render(<App />, document.getElementById('root'));
+render(<Game />, document.getElementById('root'));
