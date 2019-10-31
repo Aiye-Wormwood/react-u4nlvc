@@ -115,7 +115,6 @@ class Game extends React.Component {
 		if(i < 0 || i >= squares.length){
 			return null;
 		}
-		const point = 0;
 		const winstep = 4;
 		const x = Math.floor(i/10);
 		const y = i%10;
@@ -170,27 +169,31 @@ class Game extends React.Component {
 		for(let j = 0; j < inner1.length; j++){
 			let pp = inner1[j];
 			let cValue = squares[pp.index];
-			if(!cValue || cValue!=value){
+			let qq,qDirection;
+      if(!cValue || cValue!=value){
 				continue;
 			}
 			
 			let pp2 = this.getNextPiontByDirection(mergeAll[winstep-2],pp.d);
-			if(!pp2 || squares[pp2.index]!=value){
+			if(!pp2 || squares[pp2.index]!=value || 
+        this.calculateAnotherDirection(value,this.getPairedDirection(pp.d),mergeAll,3,winstep,squares)){
 				continue;
 			}
 			
 			let pp3 = this.getNextPiontByDirection(mergeAll[winstep-3],pp2.d);
-			if(!pp3 || squares[pp3.index]!=value){
+			if(!pp3 || squares[pp3.index]!=value ||
+        this.calculateAnotherDirection(value,this.getPairedDirection(pp2.d),mergeAll,2,winstep,squares)){
 				continue;
 			}
 			
 			let pp4 = this.getNextPiontByDirection(mergeAll[winstep-4],pp3.d);
-			if(!pp4 || squares[pp4.index]!=value){
+			if(!pp4 || squares[pp4.index]!=value || 
+        this.calculateAnotherDirection(value,this.getPairedDirection(pp3.d),mergeAll,1,winstep,squares)){
 				continue;
 			}
 			return value;
 		}
-	  	return null;
+    return null;
 	}
 	
 	getNextPiontByDirection(pointArray,direction){
@@ -202,6 +205,38 @@ class Game extends React.Component {
 		}
 		return null;
 	}
+
+  calculateAnotherDirection(value,direction,mergeAll,i,winstep,squares){
+    let p = 0;
+    for(let j=0; j < i ; j ++){
+      let qq = this.getNextPiontByDirection(mergeAll[winstep-i],direction)
+      if(qq && squares[qq.index]!=value){
+        p++;
+      } else {
+        return true;
+      }
+    }
+    return !(p==i);
+  }
+
+  getPairedDirection(direction){
+    if(direction=='A')
+      return 'E';
+     if(direction=='B')
+      return 'F'; 
+    if(direction=='C')
+      return 'G'; 
+    if(direction=='D')
+      return 'H'; 
+    if(direction=='E')
+      return 'A'; 
+    if(direction=='F')
+      return 'B'; 
+    if(direction=='G')
+      return 'C'; 
+    if(direction=='H')
+      return 'D'; 
+  }
 	
 	render() {
 		const history = this.state.history;
