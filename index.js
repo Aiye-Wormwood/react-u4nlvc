@@ -216,7 +216,7 @@ class Game extends React.Component {
     let j=0;
     for(; j < i ; j ++){
       let qq = this.getNextPiontByDirection(mergeAll[j],direction)
-      if(qq && squares[qq.index]!=value){
+      if(qq && squares[qq.index]==value){
         p++;
       } else {
         return false;
