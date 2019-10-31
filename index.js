@@ -213,7 +213,6 @@ class Game extends React.Component {
 	}
 
   calculateAnotherDirection(value,direction,mergeAll,i,squares){
-    let j=0;
     for(let j=0; j < i ; j ++){
       let qq = this.getNextPiontByDirection(mergeAll[j],direction)
       if(!qq || squares[qq.index]!=value){
