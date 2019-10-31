@@ -161,7 +161,7 @@ class Game extends React.Component {
 			mergeAll.push(merge);
 		}
 		
-		let inner1 = mergeAll[winstep-1];
+		let inner1 = mergeAll[0];
 		if(inner1.length < 1){
 			return null;
 		}
