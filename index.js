@@ -174,21 +174,21 @@ class Game extends React.Component {
 				continue;
 			}
 			
-			let pp2 = this.getNextPiontByDirection(mergeAll[winstep-2],pp.d);
+			let pp2 = this.getNextPiontByDirection(mergeAll[1],pp.d);
 			if(!pp2 || squares[pp2.index]!=value || 
-        this.calculateAnotherDirection(value,this.getPairedDirection(pp.d),mergeAll,3,winstep,squares)){
+        this.calculateAnotherDirection(value,this.getPairedDirection(pp.d),mergeAll,3,squares)){
 				continue;
 			}
 			
-			let pp3 = this.getNextPiontByDirection(mergeAll[winstep-3],pp2.d);
+			let pp3 = this.getNextPiontByDirection(mergeAll[2],pp2.d);
 			if(!pp3 || squares[pp3.index]!=value ||
-        this.calculateAnotherDirection(value,this.getPairedDirection(pp2.d),mergeAll,2,winstep,squares)){
+        this.calculateAnotherDirection(value,this.getPairedDirection(pp2.d),mergeAll,2,squares)){
 				continue;
 			}
 			
-			let pp4 = this.getNextPiontByDirection(mergeAll[winstep-4],pp3.d);
+			let pp4 = this.getNextPiontByDirection(mergeAll[3],pp3.d);
 			if(!pp4 || squares[pp4.index]!=value || 
-        this.calculateAnotherDirection(value,this.getPairedDirection(pp3.d),mergeAll,1,winstep,squares)){
+        this.calculateAnotherDirection(value,this.getPairedDirection(pp3.d),mergeAll,1,squares)){
 				continue;
 			}
 			return value;
@@ -209,7 +209,7 @@ class Game extends React.Component {
   calculateAnotherDirection(value,direction,mergeAll,i,winstep,squares){
     let p = 0;
     for(let j=0; j < i ; j ++){
-      let qq = this.getNextPiontByDirection(mergeAll[winstep-i],direction)
+      let qq = this.getNextPiontByDirection(mergeAll[j],direction)
       if(qq && squares[qq.index]!=value){
         p++;
       } else {
